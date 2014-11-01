@@ -1,0 +1,92 @@
+# Nintendo 3DS
+- target: 'Mozilla/5.0 (Nintendo 3DS; U; ; ja) Version/1.7455.JP'
+  name: Nintendo 3DS
+  os: Nintendo 3DS
+  category: appliance
+
+# Nintendo DSi
+- target: 'Opera/9.50 (Nintendo DSi; Opera/507; U; ja)'
+  name: Opera
+  version: '9.50'
+  os: Nintendo DSi
+  category: appliance
+
+# Wii
+- target: 'Opera/9.30 (Nintendo Wii; U; ; 3642; ja)'
+  name: Opera
+  version: '9.30'
+  os: Nintendo Wii
+  category: appliance
+
+# Wii U (US?)
+- target: 'Mozilla/5.0 (Nintendo WiiU) AppleWebKit/534.52 (KHTML, like Gecko) NX/2.1.0.8.21 NintendoBrowser/1.0.0.7494.US'
+  name: Nintendo Wii U
+  os: Nintendo Wii U
+  category: appliance
+
+# PlayStation 3...
+- target: 'Mozilla/5.0 (PLAYSTATION 3; 1.00)'
+  name: PlayStation 3
+  os: PlayStation 3
+  os_version: '1.00'
+  category: appliance
+
+- target: 'Mozilla/5.0 (PLAYSTATION 3 4.31) AppleWebKit/531.22.8 (KHTML, like Gecko)'
+  name: PlayStation 3
+  os: PlayStation 3
+  os_version: '4.31'
+  category: appliance
+
+# PlayStation 4
+- target: 'Mozilla/5.0 (PlayStation 4 1.000) AppleWebKit/536.26 (KHTML, like Gecko)'
+  name: PlayStation 4
+  os: PlayStation 4
+  os_version: '1.000'
+  category: appliance
+
+# PSP
+- target: 'Mozilla/4.0 (PSP (PlayStation Portable); 2.00)'
+  name: PlayStation Portable
+  os: PlayStation Portable
+  os_version: '2.00'
+  category: appliance
+
+# PSP Vita
+- target: 'Mozilla/5.0 (PlayStation Vita 1.51) AppleWebKit/531.22.8 (KHTML, like Gecko) Silk/3.2'
+  name: PlayStation Vita
+  os: PlayStation Vita
+  os_version: '1.51'
+  category: appliance
+
+# Xbox 360
+- target: 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0; Xbox)'
+  name: Xbox 360
+  os: Xbox 360
+  category: appliance
+
+# Xbox One
+- target: 'Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0; Xbox; Xbox One)'
+  name: Xbox One
+  os: Xbox One
+  category: appliance
+
+# Digital TVs
+- target: 'Mozilla/5.0 (DTV; TSBNetTV/TXXXXXXXXX.0203.ADD; like Gecko) NetFront/3.4 DTVNetBrowser/2.2 (000039;TXXXXXXXXX;0203;ADD) InettvBrowser/2.2 (000039;TXXXXXXXXX;0203;ADD) YahooDTV/1.1 (Video=0x03;Audio=0x01;Screen=0x01;Device=0x00;Remote=0x10)'
+  name: InternetTVBrowser
+  os: DigitalTV
+  category: appliance
+
+- target: 'Mozilla/5.0 (DTV; TVwithVideoPlayer) NetFront/4.1 InettvBrowser/2.2 (08001F;DTV04VSFC3;0001;0001)'
+  name: InternetTVBrowser
+  os: DigitalTV
+  category: appliance
+
+- target: 'Mozilla/5.0 (DTV; TSBNetTV/T45000006.0203.CDD; like Gecko) NetFront/3.4 DTVNetBrowser/2.2 (000039;T45011C06;0203;CDD) InettvBrowser/2.2 (000039;T45011C06;0203;CDD)'
+  name: InternetTVBrowser
+  os: DigitalTV
+  category: appliance
+
+- target: 'Mozilla/5.0 (Standard; NF34SW/1.1; like Gecko) NetFront/3.4 InettvBrowser/2.2C (000087;IP03-01;0100;0000)'
+  name: InternetTVBrowser
+  os: DigitalTV
+  category: appliance

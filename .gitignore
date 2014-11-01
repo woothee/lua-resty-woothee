@@ -1,0 +1,4 @@
+t/servroot/
+t/testfiles/*.t
+debug.log
+tmp

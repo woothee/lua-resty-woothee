@@ -1,0 +1,134 @@
+local _M = { }
+
+local util = require('resty.woothee.util')
+local dataset = require('resty.woothee.dataset')
+
+function _M.challenge_MSIE(ua, result)
+  if not string.find(ua, 'compatible; MSIE', 1, true) and not string.find(ua, 'Trident/', 1, true) and not string.find(ua, 'IEMobile/', 1, true) then
+    return false;
+  end
+
+  local version = dataset.VALUE_UNKNOWN;
+  local match, err = nil
+  match, err = ngx.re.match(ua, [[MSIE ([.0-9]+);]])
+  if match then
+    version = match[1]
+  else
+    match, err = ngx.re.match(ua, [[Trident/([.0-9]+);(?: BOIE[0-9]+;[A-Z]+;)? rv:([.0-9]+)]])
+    if match then
+      version = match[2]
+    else
+      match, err = ngx.re.match(ua, [[IEMobile/([.0-9]+);]])
+      if match then
+        version = match[1]
+      end
+    end
+  end
+
+  util.update_map(result, dataset.get('MSIE'))
+  util.update_version(result, version)
+  return true;
+end
+
+
+function _M.challenge_safari_chrome(ua, result)
+  if not string.find(ua, 'Safari/', 1, true) then
+    return false
+  elseif string.find(ua, 'Google Web Preview', 1, true) then
+    -- really????
+    return false
+  end
+
+  local version = dataset.VALUE_UNKNOWN;
+  local match, err = ngx.re.match(ua, [[(?:Chrome|CrMo|CriOS)/([.0-9]+)]])
+  if match then
+    local match_ob, err = ngx.re.match(ua, [[OPR/([.0-9]+)]])
+    if match_ob then
+      -- Opera w/ blink
+      version = match_ob[1]
+      util.update_map(result, dataset.get('Opera'))
+      util.update_version(result, version)
+      return true
+    end
+
+    -- Chrome
+    version = match[1]
+    util.update_map(result, dataset.get('Chrome'))
+    util.update_version(result, version)
+    return true
+  end
+
+  local match, err = ngx.re.match(ua, [[Version/([.0-9]+)]])
+  if match then
+    version = match[1]
+  end
+  util.update_map(result, dataset.get('Safari'))
+  util.update_version(result, version)
+  return true;
+end
+
+
+function _M.challenge_firefox(ua, result)
+  if not string.find(ua, 'Firefox/', 1, true) then
+    return false
+  end
+
+  local version = dataset.VALUE_UNKNOWN
+  local match, err = ngx.re.match(ua, [[Firefox/([.0-9]+)]])
+  if match then
+    version = match[1]
+  end
+
+  util.update_map(result, dataset.get('Firefox'))
+  util.update_version(result, version)
+  return true
+end
+
+
+function _M.challenge_opera(ua, result)
+  if not string.find(ua, 'Opera', 1, true) then
+    return false
+  end
+
+  local version = dataset.VALUE_UNKNOWN
+  local match, err = ngx.re.match(ua, [[Version/([.0-9]+)]])
+  if match then
+    version = match[1]
+  else
+    local match, err = ngx.re.match(ua, [[Opera[/ ]([.0-9]+)]])
+    if match then
+      version = match[1]
+    end
+  end
+
+  util.update_map(result, dataset.get('Opera'))
+  util.update_version(result, version)
+  return true;
+end
+
+function _M.challenge_sleipnir(ua, result)
+  if not string.find(ua, 'Sleipnir/', 1, true) then
+    return false
+  end
+
+  local version = dataset.VALUE_UNKNOWN
+  local match, err = ngx.re.match(ua, [[Sleipnir/([.0-9]+)]])
+  if match then
+    version = match[1]
+  end
+  util.update_map(result, dataset.get('Sleipnir'))
+  util.update_version(result, version)
+
+  -- [[
+ --   Sleipnir's user-agent doesn't contain Windows version, so put 'Windows UNKNOWN Ver'.
+ --   Sleipnir is IE component browser, so for Windows only.
+ -- ]]
+
+  local win = dataset.get('Win')
+  util.update_category(result, win[dataset.KEY_CATEGORY])
+  util.update_os(result, win[dataset.KEY_NAME])
+
+  return true
+end
+
+return _M
