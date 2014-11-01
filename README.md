@@ -21,7 +21,7 @@ server {
             --  => {'name': 'xxx', 'category': 'xxx', 'os': 'xxx', 'version': 'xxx', 'vendor': 'xxx'}
 
             -- crawler?
-            local crawler = woothee.is_crawler("Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)")
+            local crawler = woothee.is_crawler(ngx.var.http_user_agent)
             --  => true
 
             ngx.header.content_type = 'text/plain'
@@ -74,16 +74,60 @@ server {
 }
 ```
 
+#### Forward Backend Server
+
+```lua
+lua_package_path "/path/to/woothee-lua-resty/lib/?.lua;;";
+
+server {
+
+    # set nginx valiables
+    set $x_wt_name       '-';
+    set $x_wt_category   '-';
+    set $x_wt_os         '-';
+    set $x_wt_version    '-';
+    set $x_wt_vendor     '-';
+    set $x_wt_os_version '-';
+
+    location /test {
+        rewrite_by_lua '
+            local woothee = require "resty.woothee"
+            local r = woothee.parse(ngx.var.http_user_agent)
+            -- set nginx valiables
+            ngx.var.x_wt_name       = r.name
+            ngx.var.x_wt_category   = r.category
+            ngx.var.x_wt_os         = r.os
+            ngx.var.x_wt_version    = r.version
+            ngx.var.x_wt_vendor     = r.vendor
+            ngx.var.x_wt_os_version = r.os_version
+        ';
+
+        proxy_pass http://backend-server/;
+        # proxy set header
+        proxy_set_header X-WT-NAME       $x_wt_name;
+        proxy_set_header X-WT-CATEGORY   $x_wt_category;
+        proxy_set_header X-WT-OS         $x_wt_os;
+        proxy_set_header X-WT-VERSION    $x_wt_version;
+        proxy_set_header X-WT-VENDOR     $x_wt_vendor;
+        proxy_set_header X-WT-OS-VERSION $x_wt_os_version;
+    }
+}
+```
+
 ## For Developer
 
 #### setup
 
 ```
+# lua
 brew install lua luarocks
 
 luarocks install etlua
 luarocks install inspect
 luarocks install lyaml
+
+# perl
+cpanm Test::Nginx
 ```
 
 #### run test
