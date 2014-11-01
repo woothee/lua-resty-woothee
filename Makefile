@@ -17,6 +17,4 @@ lib/resty/woothee/dataset.lua: checkyaml
 	sync; sync; sync;
 
 test: lib/resty/woothee/dataset.lua
-	test -d t/testsets || mkdir t/testsets
-	cp woothee/testsets/*.yaml t/testsets
 	prove -Ilib
