@@ -10,11 +10,11 @@ function _M.challenge_docomo(ua, result)
 
   local version = dataset.VALUE_UNKNOWN;
   local match, err = nil
-  match, err = ngx.re.match(ua, [[DoCoMo/[.0-9]+[ /]([^- /;()"']+)]])
+  match, err = ngx.re.match(ua, [[DoCoMo/[.0-9]+[ /]([^- /;()"']+)]], "o")
   if match then
     version = match[1];
   else
-    match, err = ngx.re.match(ua, [[\(([^;)]+);FOMA;]])
+    match, err = ngx.re.match(ua, [[\(([^;)]+);FOMA;]], "o")
     if match then
       version = match[1];
     end
@@ -32,7 +32,7 @@ function _M.challenge_au(ua, result)
   end
 
   local version = dataset.VALUE_UNKNOWN;
-  local match, err = ngx.re.match(ua, [[KDDI-([^- /;()"']+)]])
+  local match, err = ngx.re.match(ua, [[KDDI-([^- /;()"']+)]], "o")
   if match then
     version = match[1]
   end
@@ -49,7 +49,7 @@ function _M.challenge_softbank(ua, result)
   end
 
   local version = dataset.VALUE_UNKNOWN;
-  local match, err = ngx.re.match(ua, [[(?:SoftBank|Vodafone|J-PHONE)/[.0-9]+/([^ /;()]+)]])
+  local match, err = ngx.re.match(ua, [[(?:SoftBank|Vodafone|J-PHONE)/[.0-9]+/([^ /;()]+)]], "o")
   if match then
     version = match[1]
   end
@@ -66,7 +66,7 @@ function _M.challenge_willcom(ua, result)
   end
 
   local version = dataset.VALUE_UNKNOWN;
-  local match, err = ngx.re.match(ua, [[(?:WILLCOM|DDIPOCKET);[^/]+/([^ /;()]+)]])
+  local match, err = ngx.re.match(ua, [[(?:WILLCOM|DDIPOCKET);[^/]+/([^ /;()]+)]], "o")
   if match then
     version = match[1]
   end
@@ -79,7 +79,7 @@ end
 function _M.challenge_misc(ua, result)
   if string.find(ua, 'jig browser', 1, true) then
     util.update_map(result, dataset.get('jig'))
-    local match, err = ngx.re.match(ua, [[jig browser[^;]+; ([^);]+)]])
+    local match, err = ngx.re.match(ua, [[jig browser[^;]+; ([^);]+)]], "o")
     if match then
       util.update_version(result, match[1])
     end

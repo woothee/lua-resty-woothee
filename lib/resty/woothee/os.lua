@@ -3,8 +3,6 @@ local _M = { }
 local util = require('resty.woothee.util')
 local dataset = require('resty.woothee.dataset')
 
-local windows_pattern = 'Windows ([ .a-zA-Z0-9]+)[;)]'
-local windows_phone_pattern = [[^Phone(?: OS)? ([.0-9]+)]]
 function _M.challenge_windows(ua, result)
   if not string.find(ua, 'Windows', 1, true) then
     return false;
@@ -22,7 +20,7 @@ function _M.challenge_windows(ua, result)
   end
 
   local data = dataset.get('Win');
-  local match, err = ngx.re.match(ua, windows_pattern)
+  local match, err = ngx.re.match(ua, 'Windows ([ .a-zA-Z0-9]+)[;)]', "o")
   if not match then
     -- Windows, but version unknown
     util.update_category(result, data[dataset.KEY_CATEGORY]);
@@ -52,7 +50,7 @@ function _M.challenge_windows(ua, result)
   elseif version == 'CE' then
     data = dataset.get('WinCE')
   else
-    match, err = ngx.re.match(version, windows_phone_pattern)
+    match, err = ngx.re.match(version, [[^Phone(?: OS)? ([.0-9]+)]], "o")
     data = dataset.get('WinPhone')
     version = match[1]
   end
@@ -84,13 +82,13 @@ function _M.challenge_osx(ua, result)
       data = dataset.get('iPod')
     end
 
-    local match, err = ngx.re.match(ua, [[; CPU(?: iPhone)? OS (\d+_\d+(?:_\d+)?) like Mac OS X]])
+    local match, err = ngx.re.match(ua, [[; CPU(?: iPhone)? OS (\d+_\d+(?:_\d+)?) like Mac OS X]], "o")
     if match and match[1] then
       version, dummy = string.gsub(match[1], "_", ".")
     end
 
   else
-    local match, err = ngx.re.match(ua, [[Mac OS X (10[._]\d+(?:[._]\d+)?)(?:\)|;)]])
+    local match, err = ngx.re.match(ua, [[Mac OS X (10[._]\d+(?:[._]\d+)?)(?:\)|;)]], "o")
     if match and match[1] then
       version, dummy = string.gsub(match[1], "_", ".")
     end
@@ -116,7 +114,7 @@ function _M.challenge_linux(ua, result)
 
   if string.find(ua, 'Android', 1, true) then
     data = dataset.get('Android');
-    match, err = ngx.re.match(ua, [[Android[- ](\d+.\d+(?:.\d+)?)]])
+    match, err = ngx.re.match(ua, [[Android[- ](\d+.\d+(?:.\d+)?)]], "o")
     if match then
       os_version = match[1]
     end
@@ -146,7 +144,7 @@ function _M.challenge_smart_phone(ua, result)
     data = dataset.get('iOS')
   elseif string.find(ua, 'BlackBerry', 1, true) then
     data = dataset.get('BlackBerry')
-    match, err = ngx.re.match(ua, [[BlackBerry(?:\d+)/([.0-9]+) ]])
+    match, err = ngx.re.match(ua, [[BlackBerry(?:\d+)/([.0-9]+) ]], "o")
     if match then
       os_version = match[1]
     end
@@ -156,7 +154,7 @@ function _M.challenge_smart_phone(ua, result)
     -- Firefox OS specific pattern
     -- http://lawrencemandel.com/2012/07/27/decision-made-firefox-os-user-agent-string/
     -- https://github.com/woothee/woothee/issues/2
-    match, err = ngx.re.match(ua, [[^Mozilla/[.0-9]+ \((?:Mobile|Tablet);(?:.*;)? rv:([.0-9]+)\) Gecko/[.0-9]+ Firefox/[.0-9]+$]])
+    match, err = ngx.re.match(ua, [[^Mozilla/[.0-9]+ \((?:Mobile|Tablet);(?:.*;)? rv:([.0-9]+)\) Gecko/[.0-9]+ Firefox/[.0-9]+$]], "o")
     if match then
       data = dataset.get('FirefoxOS');
       os_version = match[1]
@@ -179,7 +177,7 @@ function _M.challenge_mobile_phone(ua, result)
   local data, match, err = nil
 
   if string.find(ua, 'KDDI-', 1, true) then
-    match, err = ngx.re.match(ua, [[KDDI-([^- /;()"']+)]])
+    match, err = ngx.re.match(ua, [[KDDI-([^- /;()"']+)]], "o")
     if match then
       local term = match[1];
       data = dataset.get('au');
@@ -189,7 +187,7 @@ function _M.challenge_mobile_phone(ua, result)
       return true
     end
   elseif string.find(ua, 'WILLCOM', 1, true) or string.find(ua, 'DDIPOCKET', 1, true) then
-    match, err = ngx.re.match(ua, [[(?:WILLCOM|DDIPOCKET);[^/]+/([^ /;()]+)]])
+    match, err = ngx.re.match(ua, [[(?:WILLCOM|DDIPOCKET);[^/]+/([^ /;()]+)]], "o")
     if match then
       local term = match[1];
       data = dataset.get('willcom');
@@ -242,7 +240,7 @@ function _M.challenge_misc(ua, result)
     os_version = '98'
   elseif string.find(ua, 'Macintosh; U; PPC;', 1, true) then
     data = dataset.get('MacOS');
-    match, err = ngx.re.match(ua, [[rv:(\d+.\d+.\d+)]])
+    match, err = ngx.re.match(ua, [[rv:(\d+.\d+.\d+)]], "o")
     if match then
       os_version = match[1]
     end
@@ -250,13 +248,13 @@ function _M.challenge_misc(ua, result)
     data = dataset.get('MacOS');
   elseif string.find(ua, 'X11; FreeBSD ', 1, true) then
     data = dataset.get('BSD');
-    match, err = ngx.re.match(ua, [[FreeBSD ([^;\)]+);]])
+    match, err = ngx.re.match(ua, [[FreeBSD ([^;\)]+);]], "o")
     if match then
       os_version = match[1]
     end
   elseif string.find(ua, 'X11; CrOS ', 1, true) then
     data = dataset.get('ChromeOS');
-    match, err = ngx.re.match(ua, [[CrOS ([^\)]+)\)]])
+    match, err = ngx.re.match(ua, [[CrOS ([^\)]+)\)]], "o")
     if match then
       os_version = match[1]
     end

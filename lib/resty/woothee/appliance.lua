@@ -8,25 +8,25 @@ function _M.challenge_playstation(ua, result)
 
   if string.find(ua, 'PSP (PlayStation Portable);', 1, true) then
     data = dataset.get('PSP')
-    match, err = ngx.re.match(ua, [[PSP \(PlayStation Portable\); ([.0-9]+)\)]])
+    match, err = ngx.re.match(ua, [[PSP \(PlayStation Portable\); ([.0-9]+)\)]], "o")
     if match then
       os_version = match[1]
     end
   elseif string.find(ua, 'PlayStation Vita', 1, true) then
     data = dataset.get('PSVita')
-    match, err = ngx.re.match(ua, [[PlayStation Vita ([.0-9]+)\)]])
+    match, err = ngx.re.match(ua, [[PlayStation Vita ([.0-9]+)\)]], "o")
     if match then
       os_version = match[1]
     end
   elseif string.find(ua, 'PLAYSTATION 3 ', 1, true) or string.find(ua, 'PLAYSTATION 3;', 1, true) then
     data = dataset.get('PS3')
-    match, err = ngx.re.match(ua, [[PLAYSTATION 3;? ([.0-9]+)\)]])
+    match, err = ngx.re.match(ua, [[PLAYSTATION 3;? ([.0-9]+)\)]], "o")
     if match then
       os_version = match[1]
     end
   elseif string.find(ua, 'PlayStation 4 ', 1, true) then
     data = dataset.get('PS4')
-    match, err = ngx.re.match(ua, [[PlayStation 4 ([.0-9]+)\)]])
+    match, err = ngx.re.match(ua, [[PlayStation 4 ([.0-9]+)\)]], "o")
     if match then
       os_version = match[1]
     end

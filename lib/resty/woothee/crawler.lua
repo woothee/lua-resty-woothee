@@ -182,16 +182,16 @@ end
 function _M.challenge_maybe_crawler(ua, result)
   local data = nil
 
-  if ngx.re.match(ua, [[(bot|crawler|spider)(?:[-_ ./;@()]|$)]], "i") then
+  if ngx.re.match(ua, [[(bot|crawler|spider)(?:[-_ ./;@()]|$)]], "io") then
     util.update_map(result, dataset.get('VariousCrawler'))
     return true
-  elseif ngx.re.match(ua, [[^(?:Rome Client |UnwindFetchor/|ia_archiver |Summify |PostRank/)]]) or string.find(ua, 'ASP-Ranker Feed Crawler', 1, true) then
+  elseif ngx.re.match(ua, [[^(?:Rome Client |UnwindFetchor/|ia_archiver |Summify |PostRank/)]], "o") or string.find(ua, 'ASP-Ranker Feed Crawler', 1, true) then
     util.update_map(result, dataset.get('VariousCrawler'))
     return true
-  elseif ngx.re.match(ua, [[(feed|web) ?parser]], "i") then
+  elseif ngx.re.match(ua, [[(feed|web) ?parser]], "io") then
     util.update_map(result, dataset.get('VariousCrawler'))
     return true
-  elseif ngx.re.match(ua, [[watch ?dog]], "i") then
+  elseif ngx.re.match(ua, [[watch ?dog]], "io") then
     util.update_map(result, dataset.get('VariousCrawler'))
     return true
   end

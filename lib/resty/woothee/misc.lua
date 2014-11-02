@@ -40,25 +40,25 @@ end
 function _M.challenge_http_library(ua, result)
   local data,version = nil
 
-  if ngx.re.match(ua, [[^(?:Apache-HttpClient/|Jakarta Commons-HttpClient/|Java/)]]) or ngx.re.match(ua, [[[- ]HttpClient(/|$)]]) then
+  if ngx.re.match(ua, [[^(?:Apache-HttpClient/|Jakarta Commons-HttpClient/|Java/)]], "o") or ngx.re.match(ua, [[[- ]HttpClient(/|$)]], "o") then
     data = dataset.get('HTTPLibrary')
     version = 'Java'
   elseif string.find(ua, 'Java(TM) 2 Runtime Environment,', 1, true) then
     data = dataset.get('HTTPLibrary')
     version = 'Java'
-  elseif ngx.re.match(ua, [[^Wget]]) then
+  elseif ngx.re.match(ua, [[^Wget]], "o") then
     data = dataset.get('HTTPLibrary')
     version = 'wget'
-  elseif ngx.re.match(ua, [[^(?:libwww-perl|WWW-Mechanize|LWP::Simple|LWP |lwp-trivial)]]) then
+  elseif ngx.re.match(ua, [[^(?:libwww-perl|WWW-Mechanize|LWP::Simple|LWP |lwp-trivial)]], "o") then
     data = dataset.get('HTTPLibrary')
     version = 'perl'
-  elseif ngx.re.match(ua, [[^(?:Ruby|feedzirra|Typhoeus)]]) then
+  elseif ngx.re.match(ua, [[^(?:Ruby|feedzirra|Typhoeus)]], "o") then
     data = dataset.get('HTTPLibrary')
     version = 'ruby'
-  elseif ngx.re.match(ua, [[^(?:Python-urllib\/|Twisted )]]) then
+  elseif ngx.re.match(ua, [[^(?:Python-urllib\/|Twisted )]], "o") then
     data = dataset.get('HTTPLibrary')
     version = 'python'
-  elseif ngx.re.match(ua, [[^(?:PHP|WordPress|CakePHP|PukiWiki|PECL::HTTP)(?:/| |$)]]) or ngx.re.match(ua, [[(?:PEAR |)HTTP_Request(?: class|2)]]) then
+  elseif ngx.re.match(ua, [[^(?:PHP|WordPress|CakePHP|PukiWiki|PECL::HTTP)(?:/| |$)]], "o") or ngx.re.match(ua, [[(?:PEAR |)HTTP_Request(?: class|2)]], "o") then
     data = dataset.get('HTTPLibrary')
     version = 'php'
   elseif string.find(ua, 'PEAR HTTP_Request class;', 1, true) then
@@ -79,7 +79,7 @@ end
 function _M.challenge_maybe_rss_reader(ua, result)
   local data = nil
 
-  if ngx.re.match(ua, [[rss(?:reader|bar|[-_ /;()]|[ +]*/)]], "i") or ngx.re.match(ua, [[headline-reader]], "i") then
+  if ngx.re.match(ua, [[rss(?:reader|bar|[-_ /;()]|[ +]*/)]], "io") or ngx.re.match(ua, [[headline-reader]], "io") then
     data = dataset.get('VariousRSSReader')
   else
     if string.find(ua, 'cococ/', 1, true) then

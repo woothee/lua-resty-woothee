@@ -10,15 +10,15 @@ function _M.challenge_MSIE(ua, result)
 
   local version = dataset.VALUE_UNKNOWN;
   local match, err = nil
-  match, err = ngx.re.match(ua, [[MSIE ([.0-9]+);]])
+  match, err = ngx.re.match(ua, [[MSIE ([.0-9]+);]], "o")
   if match then
     version = match[1]
   else
-    match, err = ngx.re.match(ua, [[Trident/([.0-9]+);(?: BOIE[0-9]+;[A-Z]+;)? rv:([.0-9]+)]])
+    match, err = ngx.re.match(ua, [[Trident/([.0-9]+);(?: BOIE[0-9]+;[A-Z]+;)? rv:([.0-9]+)]], "o")
     if match then
       version = match[2]
     else
-      match, err = ngx.re.match(ua, [[IEMobile/([.0-9]+);]])
+      match, err = ngx.re.match(ua, [[IEMobile/([.0-9]+);]], "o")
       if match then
         version = match[1]
       end
@@ -40,9 +40,9 @@ function _M.challenge_safari_chrome(ua, result)
   end
 
   local version = dataset.VALUE_UNKNOWN;
-  local match, err = ngx.re.match(ua, [[(?:Chrome|CrMo|CriOS)/([.0-9]+)]])
+  local match, err = ngx.re.match(ua, [[(?:Chrome|CrMo|CriOS)/([.0-9]+)]], "o")
   if match then
-    local match_ob, err = ngx.re.match(ua, [[OPR/([.0-9]+)]])
+    local match_ob, err = ngx.re.match(ua, [[OPR/([.0-9]+)]], "o")
     if match_ob then
       -- Opera w/ blink
       version = match_ob[1]
@@ -58,7 +58,7 @@ function _M.challenge_safari_chrome(ua, result)
     return true
   end
 
-  local match, err = ngx.re.match(ua, [[Version/([.0-9]+)]])
+  local match, err = ngx.re.match(ua, [[Version/([.0-9]+)]], "o")
   if match then
     version = match[1]
   end
@@ -74,7 +74,7 @@ function _M.challenge_firefox(ua, result)
   end
 
   local version = dataset.VALUE_UNKNOWN
-  local match, err = ngx.re.match(ua, [[Firefox/([.0-9]+)]])
+  local match, err = ngx.re.match(ua, [[Firefox/([.0-9]+)]], "o")
   if match then
     version = match[1]
   end
@@ -91,11 +91,11 @@ function _M.challenge_opera(ua, result)
   end
 
   local version = dataset.VALUE_UNKNOWN
-  local match, err = ngx.re.match(ua, [[Version/([.0-9]+)]])
+  local match, err = ngx.re.match(ua, [[Version/([.0-9]+)]], "o")
   if match then
     version = match[1]
   else
-    local match, err = ngx.re.match(ua, [[Opera[/ ]([.0-9]+)]])
+    local match, err = ngx.re.match(ua, [[Opera[/ ]([.0-9]+)]], "o")
     if match then
       version = match[1]
     end
@@ -112,7 +112,7 @@ function _M.challenge_sleipnir(ua, result)
   end
 
   local version = dataset.VALUE_UNKNOWN
-  local match, err = ngx.re.match(ua, [[Sleipnir/([.0-9]+)]])
+  local match, err = ngx.re.match(ua, [[Sleipnir/([.0-9]+)]], "o")
   if match then
     version = match[1]
   end
