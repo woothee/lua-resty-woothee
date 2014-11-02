@@ -18,13 +18,13 @@ server {
 
             -- parse
             local r = woothee.parse(ngx.var.http_user_agent)
-            --  => {'name': 'xxx', 'category': 'xxx', 'os': 'xxx', 'version': 'xxx', 'vendor': 'xxx'}
+            --  => {"name": "xxx', "category": "xxx', "os": "xxx", "version": "xxx", "vendor": "xxx"}
 
             -- crawler?
             local crawler = woothee.is_crawler(ngx.var.http_user_agent)
             --  => true
 
-            ngx.header.content_type = 'text/plain'
+            ngx.header.content_type = "text/plain"
             ngx.say(r.name)
         ';
     }
