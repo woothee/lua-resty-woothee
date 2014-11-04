@@ -114,25 +114,14 @@ server {
 }
 ```
 
-## For Developer
+## For Developer (on Docker)
 
-#### setup
-
+#### docker run & run test
 ```
-# lua
-brew install lua luarocks
+docker run -v "$(pwd)":/code -i -t toritori0318/woothee-lua-resty /bin/bash
 
-luarocks install etlua
-luarocks install inspect
-luarocks install lyaml
+(in container)
 
-# perl
-cpanm Test::Nginx
-```
-
-#### run test
-
-```
 make all
 ```
 
