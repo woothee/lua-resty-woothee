@@ -4,13 +4,18 @@ The Lua-Openresty implementation of Project Woothee, which is multi-language use
 
 https://github.com/woothee/woothee
 
+## Installation
+
+```
+luarocks install https://raw.githubusercontent.com/toritori0318/lua-resty-woothee/add_rockspec/lua-resty-woothee-dev-1.rockspec
+```
+
+
 ## Synopsis
 
 #### Basic Usage
 
 ```lua
-lua_package_path "/path/to/woothee-lua-resty/lib/?.lua;;";
-
 server {
     location /test {
         content_by_lua '
@@ -34,8 +39,6 @@ server {
 #### Include Nginx Log
 
 ```lua
-lua_package_path "/path/to/woothee-lua-resty/lib/?.lua;;";
-
 log_format woothee_format
                   '$remote_addr - $remote_user [$time_local] '
                   '"$request" $status $body_bytes_sent '
@@ -77,8 +80,6 @@ server {
 #### Forward Backend Server
 
 ```lua
-lua_package_path "/path/to/woothee-lua-resty/lib/?.lua;;";
-
 server {
 
     # set nginx valiables
