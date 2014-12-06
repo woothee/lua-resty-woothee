@@ -7,7 +7,7 @@ https://github.com/woothee/woothee
 ## Installation
 
 ```
-luarocks install https://raw.githubusercontent.com/toritori0318/lua-resty-woothee/add_rockspec/lua-resty-woothee-dev-1.rockspec
+luarocks install https://raw.githubusercontent.com/toritori0318/lua-resty-woothee/master/lua-resty-woothee-dev-1.rockspec
 ```
 
 
