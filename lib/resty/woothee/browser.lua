@@ -14,9 +14,10 @@ function _M.challenge_MSIE(ua, result)
   if match then
     version = match[1]
   else
-    match, err = ngx.re.match(ua, [[Trident/([.0-9]+);(?: BOIE[0-9]+;[A-Z]+;)? rv:([.0-9]+)]], "o")
-    if match then
-      version = match[2]
+    local match1, err1 = ngx.re.match(ua, [[Trident/([.0-9]+);]], "o")
+    local match2, err2 = ngx.re.match(ua, [[ rv:([.0-9]+)]], "o")
+    if match1 and match2 then
+      version = match2[1]
     else
       match, err = ngx.re.match(ua, [[IEMobile/([.0-9]+);]], "o")
       if match then
