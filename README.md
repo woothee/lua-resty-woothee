@@ -119,7 +119,7 @@ server {
 
 #### docker run & run test
 ```
-docker run -v "$(pwd)":/code -i -t toritori0318/woothee-lua-resty /bin/bash
+docker run -v "$(pwd)":/code -i -t toritori0318/lua-resty-woothee /bin/bash
 
 (in container)
 
