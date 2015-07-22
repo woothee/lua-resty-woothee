@@ -51,8 +51,10 @@ function _M.challenge_windows(ua, result)
     data = dataset.get('WinCE')
   else
     match, err = ngx.re.match(version, [[^Phone(?: OS)? ([.0-9]+)]], "o")
-    data = dataset.get('WinPhone')
-    version = match[1]
+    if match then
+      data = dataset.get('WinPhone')
+      version = match[1]
+    end
   end
 
   util.update_category(result, data[dataset.KEY_CATEGORY]);
