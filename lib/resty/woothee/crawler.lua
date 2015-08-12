@@ -109,6 +109,11 @@ function _M.challenge_crawlers(ua, result)
     return true
   end
 
+  if string.find(ua, 'Twitterbot/', 1, true) then
+    util.update_map(result, dataset.get('twitter'))
+    return true
+  end
+
   if string.find(ua, 'ichiro', 1, true) then
     if string.find(ua, 'http://help.goo.ne.jp/door/crawler.html', 1, true) or string.find(ua, 'compatible; ichiro/mobile goo;', 1, true) then
       util.update_map(result, dataset.get('goo'))

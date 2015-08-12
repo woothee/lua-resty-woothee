@@ -652,6 +652,15 @@ obj["category"] = 'crawler'
 DATASET[obj.label] = obj
 
 local obj = {
+  label='twitter',
+  name='twitter',
+  type='full'
+}
+obj["vendor"] = ''
+obj["category"] = 'crawler'
+DATASET[obj.label] = obj
+
+local obj = {
   label='mixi',
   name='mixi',
   type='full'
