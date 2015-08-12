@@ -29,7 +29,9 @@ function _M.challenge_windows(ua, result)
   end
 
   local version = match[1]
-  if version == 'NT 6.3' then
+  if version == 'NT 10.0' then
+    data = dataset.get('Win10')
+  elseif version == 'NT 6.3' then
     data = dataset.get('Win8.1')
   elseif version == 'NT 6.2' then
     data = dataset.get('Win8') -- "NT 6.2; ARM;" means Windows RT, oh....

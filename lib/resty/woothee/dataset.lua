@@ -42,6 +42,14 @@ obj["vendor"] = 'Microsoft'
 DATASET[obj.label] = obj
 
 local obj = {
+  label='Edge',
+  name='Edge',
+  type='browser'
+}
+obj["vendor"] = 'Microsoft'
+DATASET[obj.label] = obj
+
+local obj = {
   label='Chrome',
   name='Chrome',
   type='browser'
@@ -92,6 +100,14 @@ DATASET[obj.label] = obj
 local obj = {
   label='Win',
   name='Windows UNKNOWN Ver',
+  type='os'
+}
+obj["category"] = 'pc'
+DATASET[obj.label] = obj
+
+local obj = {
+  label='Win10',
+  name='Windows 10',
   type='os'
 }
 obj["category"] = 'pc'
