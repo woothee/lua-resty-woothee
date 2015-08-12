@@ -29,10 +29,11 @@ __DATA__
         content_by_lua '
             local woothee = require "resty.woothee"
             local set_name = "Crawler"
-            local target = "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022"
+            local target = "Mozilla/5.0 (Windows NT xxxxxxxxxxxxxx....)"
             -- local target = "Girls/2.0 (livedoor Co.,Ltd.; Peachy 2.1; iPhone; RSS Version 2.0; +http://girls.livedoor.com/)"
             local r = woothee.parse(target)
             local inspect = require("inspect")
+            ngx.say("browser=" .. target)
             ngx.say(inspect(r))
         ';
     }
