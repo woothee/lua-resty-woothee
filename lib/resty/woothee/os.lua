@@ -144,6 +144,12 @@ function _M.challenge_smart_phone(ua, result)
     data = dataset.get('Android')
   elseif string.find(ua, 'CFNetwork', 1, true) then
     data = dataset.get('iOS')
+  elseif string.find(ua, 'BB10', 1, true) then
+    data = dataset.get('BlackBerry10')
+    match, err = ngx.re.match(ua, [[Version/([.0-9]+) ]], "o")
+    if match then
+      os_version = match[1]
+    end
   elseif string.find(ua, 'BlackBerry', 1, true) then
     data = dataset.get('BlackBerry')
     match, err = ngx.re.match(ua, [[BlackBerry(?:\d+)/([.0-9]+) ]], "o")

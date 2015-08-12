@@ -290,6 +290,14 @@ obj["category"] = 'smartphone'
 DATASET[obj.label] = obj
 
 local obj = {
+  label='BlackBerry10',
+  name='BlackBerry 10',
+  type='os'
+}
+obj["category"] = 'smartphone'
+DATASET[obj.label] = obj
+
+local obj = {
   label='docomo',
   name='docomo',
   type='full'
