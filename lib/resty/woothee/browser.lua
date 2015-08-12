@@ -107,6 +107,28 @@ function _M.challenge_opera(ua, result)
   return true;
 end
 
+function _M.challenge_webview(ua, result)
+  local version = dataset.VALUE_UNKNOWN
+
+
+  local match, err = ngx.re.match(ua, [[iP(?:hone;|ad;|od) (.*)like Mac OS X]], "o")
+  if match then
+    if string.find(ua, 'Safari/', 1, true) then
+      return false
+    end
+
+    local match, err = ngx.re.match(ua, [[Version/([.0-9]+)]], "o")
+    if match then
+      version = match[1]
+    end
+    util.update_map(result, dataset.get('Webview'))
+    util.update_version(result, version)
+    return true
+  end
+
+  return false
+end
+
 function _M.challenge_sleipnir(ua, result)
   if not string.find(ua, 'Sleipnir/', 1, true) then
     return false

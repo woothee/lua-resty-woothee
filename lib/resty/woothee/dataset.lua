@@ -82,6 +82,14 @@ obj["vendor"] = 'Fenrir Inc.'
 DATASET[obj.label] = obj
 
 local obj = {
+  label='Webview',
+  name='Webview',
+  type='browser'
+}
+obj["vendor"] = 'OS vendor'
+DATASET[obj.label] = obj
+
+local obj = {
   label='Win',
   name='Windows UNKNOWN Ver',
   type='os'
