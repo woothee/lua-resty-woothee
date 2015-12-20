@@ -48,6 +48,14 @@ function _M.challenge_safari_chrome(ua, result)
     return true
   end
 
+  local match, err = ngx.re.match(ua, [[FxiOS\/([.0-9]+)]], "o")
+  if match then
+    version = match[1]
+    util.update_map(result, dataset.get('Firefox'))
+    util.update_version(result, version)
+    return true
+  end
+
   local version = dataset.VALUE_UNKNOWN;
   local match, err = ngx.re.match(ua, [[(?:Chrome|CrMo|CriOS)/([.0-9]+)]], "o")
   if match then
