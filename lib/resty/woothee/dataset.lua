@@ -82,6 +82,14 @@ obj["vendor"] = 'Opera'
 DATASET[obj.label] = obj
 
 local obj = {
+  label='Vivaldi',
+  name='Vivaldi',
+  type='browser'
+}
+obj["vendor"] = 'Vivaldi Technologies'
+DATASET[obj.label] = obj
+
+local obj = {
   label='Sleipnir',
   name='Sleipnir',
   type='browser'

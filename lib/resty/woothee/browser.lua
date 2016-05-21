@@ -170,4 +170,20 @@ function _M.challenge_sleipnir(ua, result)
   return true
 end
 
+function _M.challenge_vivaldi(ua, result)
+  if not string.find(ua, 'Vivaldi/', 1, true) then
+    return false
+  end
+
+  local version = dataset.VALUE_UNKNOWN
+  local match, err = ngx.re.match(ua, [[Vivaldi/([.0-9]+)]], "o")
+  if match then
+    version = match[1]
+  end
+  util.update_map(result, dataset.get('Vivaldi'))
+  util.update_version(result, version)
+
+  return true
+end
+
 return _M
