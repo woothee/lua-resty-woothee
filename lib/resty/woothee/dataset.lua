@@ -665,6 +665,15 @@ obj["category"] = 'crawler'
 DATASET[obj.label] = obj
 
 local obj = {
+  label='BingPreview',
+  name='BingPreview',
+  type='full'
+}
+obj["vendor"] = ''
+obj["category"] = 'crawler'
+DATASET[obj.label] = obj
+
+local obj = {
   label='Yeti',
   name='Naver Yeti',
   type='full'

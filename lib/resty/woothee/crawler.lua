@@ -85,6 +85,11 @@ function _M.challenge_crawlers(ua, result)
     end
   end
 
+  if string.find(ua, 'BingPreview', 1, true) then
+    util.update_map(result, dataset.get('BingPreview'))
+    return true
+  end
+
   if string.find(ua, 'Baidu', 1, true) then
     if string.find(ua, 'compatible; Baiduspider', 1, true) or string.find(ua, 'Baiduspider+', 1, true) or string.find(ua, 'Baiduspider-image+', 1, true) then
       util.update_map(result, dataset.get('Baiduspider'))
