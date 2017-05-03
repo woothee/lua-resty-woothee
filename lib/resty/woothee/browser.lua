@@ -35,6 +35,8 @@ end
 function _M.challenge_safari_chrome(ua, result)
   if not string.find(ua, 'Safari/', 1, true) then
     return false
+  elseif string.find(ua, 'Chrome', 1, true) and string.find(ua, 'wv', 1, true) then
+    return false
   elseif string.find(ua, 'Google Web Preview', 1, true) then
     -- really????
     return false
@@ -126,6 +128,15 @@ end
 function _M.challenge_webview(ua, result)
   local version = dataset.VALUE_UNKNOWN
 
+  if string.find(ua, 'Chrome', 1, true) and string.find(ua, 'wv', 1, true) then
+    local match, err = ngx.re.match(ua, [[Version/([.0-9]+)]], "o")
+    if match then
+      version = match[1]
+    end
+    util.update_map(result, dataset.get('Webview'))
+    util.update_version(result, version)
+    return true
+  end
 
   local match, err = ngx.re.match(ua, [[iP(?:hone;|ad;|od) (.*)like Mac OS X]], "o")
   if match then
