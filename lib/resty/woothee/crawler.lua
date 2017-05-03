@@ -185,6 +185,11 @@ function _M.challenge_crawlers(ua, result)
     end
   end
 
+  if string.find(ua, 'trendictionbot', 1, true) then
+    util.update_map(result, dataset.get('trendictionbot'))
+    return true
+  end
+
   return false
 end
 
