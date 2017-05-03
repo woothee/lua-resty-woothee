@@ -9,10 +9,7 @@ testfiles: testsets
 	LUA_PATH=$(LUA_PATH) lua maint/testset_yaml2lua.lua
 	sync; sync; sync;
 
-checkyaml: testfiles
-	perl woothee/bin/dataset_checker.pl
-
-lib/resty/woothee/dataset.lua: checkyaml
+lib/resty/woothee/dataset.lua: testfiles
 	LUA_PATH=$(LUA_PATH) lua maint/dataset_yaml2lua.lua
 	sync; sync; sync;
 
