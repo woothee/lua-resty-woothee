@@ -98,7 +98,7 @@ function _M.challenge_crawlers(ua, result)
   end
 
   if string.find(ua, 'Yeti', 1, true) then
-    if string.find(ua, 'http://help.naver.com/robots', 1, true) then
+    if string.find(ua, 'http://help.naver.com/robots', 1, true) or string.find(ua, 'http://help.naver.com/support/robots.html', 1, true) or string.find(ua, 'http://naver.me/bot', 1, true) then
       util.update_map(result, dataset.get('Yeti'))
       return true
     end
