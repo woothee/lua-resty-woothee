@@ -64,6 +64,9 @@ function _M.challenge_http_library(ua, result)
   elseif string.find(ua, 'PEAR HTTP_Request class;', 1, true) then
     data = dataset.get('HTTPLibrary')
     version = 'php'
+  elseif string.find(ua, 'curl/', 1, true) then
+    data = dataset.get('HTTPLibrary')
+    version = 'curl'
   end
 
   if not data then
