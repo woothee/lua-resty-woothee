@@ -1,11 +1,11 @@
 package = "lua-resty-woothee"
-version = "dev-1"
+version = "1.7.0-1"
 source = {
-    url = "https://github.com/toritori0318/lua-resty-woothee/archive/master.tar.gz",
-    dir = "lua-resty-woothee-master"
+    url = "git://github.com/woothee/lua-resty-woothee",
+    tag = "v1.7.0"
 }
 description = {
-    summary = "Woothee Lua-Openresty implementation",
+    summary = "Woothee(UA Parser) Lua-Openresty implementation",
     detailed = [[The Lua-Openresty implementation of Project Woothee, which is multi-language user-agent strings parsers.]],
     homepage = "https://github.com/toritori0318/lua-resty-woothee",
     license = "MIT",
