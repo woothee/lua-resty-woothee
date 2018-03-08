@@ -8,7 +8,7 @@ description = {
     summary = "Woothee(UA Parser) Lua-Openresty implementation",
     detailed = [[The Lua-Openresty implementation of Project Woothee, which is multi-language user-agent strings parsers.]],
     homepage = "https://github.com/toritori0318/lua-resty-woothee",
-    license = "MIT",
+    license = "Apache License 2.0",
     maintainer = "toritori0318"
 }
 dependencies = {
