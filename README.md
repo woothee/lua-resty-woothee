@@ -7,7 +7,7 @@ https://github.com/woothee/woothee
 ## Installation
 
 ```
-luarocks install https://raw.githubusercontent.com/toritori0318/lua-resty-woothee/master/lua-resty-woothee-dev-1.rockspec
+luarocks install lua-resty-woothee
 ```
 
 
@@ -18,7 +18,7 @@ luarocks install https://raw.githubusercontent.com/toritori0318/lua-resty-woothe
 ```lua
 server {
     location /test {
-        content_by_lua '
+        content_by_lua_block {
             local woothee = require "resty.woothee"
 
             -- parse
@@ -31,7 +31,7 @@ server {
 
             ngx.header.content_type = "text/plain"
             ngx.say(r.name)
-        ';
+        }
     }
 }
 ```
@@ -59,7 +59,7 @@ server {
     set $x_wt_os_version '-';
 
     location /test {
-        content_by_lua '
+        content_by_lua_block {
             local woothee = require "resty.woothee"
             local r = woothee.parse(ngx.var.http_user_agent)
             -- set nginx valiables
@@ -72,7 +72,7 @@ server {
 
             ngx.header.content_type = "text/plain"
             ngx.say(r.name)
-        ';
+        }
     }
 }
 ```
@@ -91,7 +91,7 @@ server {
     set $x_wt_os_version '-';
 
     location /test {
-        rewrite_by_lua '
+        rewrite_by_lua_block {
             local woothee = require "resty.woothee"
             local r = woothee.parse(ngx.var.http_user_agent)
             -- set nginx valiables
@@ -101,7 +101,7 @@ server {
             ngx.var.x_wt_version    = r.version
             ngx.var.x_wt_vendor     = r.vendor
             ngx.var.x_wt_os_version = r.os_version
-        ';
+        }
 
         proxy_pass http://backend-server/;
         # proxy set header
