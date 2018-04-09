@@ -110,12 +110,12 @@ function _M.challenge_yandexbrowser(ua, result)
   end
 
   local version = dataset.VALUE_UNKNOWN
-  local match, err = ngx.re.match(ua, [[YaBrowser/(\d+\.\d+\.\d+)]], "o")
+  local match, err = ngx.re.match(ua, [[YaBrowser/(\d+\.\d+\.\d+\.\d+)]], "o")
   if match then
     version = match[1]
   end
 
-  util.update_map(result, dataset.get('YandexBrowser'))
+  util.update_map(result, dataset.get('Yandex Browser'))
   util.update_version(result, version)
   return true
 end
