@@ -115,7 +115,7 @@ function _M.challenge_yandexbrowser(ua, result)
     version = match[1]
   end
 
-  util.update_map(result, dataset.get('Yandex Browser'))
+  util.update_map(result, dataset.get('YaBrowser'))
   util.update_version(result, version)
   return true
 end
