@@ -104,6 +104,23 @@ function _M.challenge_firefox(ua, result)
 end
 
 
+function _M.challenge_yandexbrowser(ua, result)
+  if not string.find(ua, 'YaBrowser/', 1, true) then
+    return false
+  end
+
+  local version = dataset.VALUE_UNKNOWN
+  local match, err = ngx.re.match(ua, [[YaBrowser/(\d+\.\d+\.\d+\.\d+)]], "o")
+  if match then
+    version = match[1]
+  end
+
+  util.update_map(result, dataset.get('YaBrowser'))
+  util.update_version(result, version)
+  return true
+end
+
+
 function _M.challenge_opera(ua, result)
   if not string.find(ua, 'Opera', 1, true) then
     return false

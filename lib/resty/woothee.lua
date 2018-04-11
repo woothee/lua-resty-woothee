@@ -30,6 +30,10 @@ local function try_browser(useragent, result)
     return true
   end
 
+  if browser.challenge_yandexbrowser(useragent, result) then
+    return true
+  end
+
   if browser.challenge_safari_chrome(useragent, result) then
     return true
   end
