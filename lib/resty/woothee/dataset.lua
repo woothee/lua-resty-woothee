@@ -106,6 +106,14 @@ obj["vendor"] = 'OS vendor'
 DATASET[obj.label] = obj
 
 local obj = {
+  label='YaBrowser',
+  name='Yandex Browser',
+  type='browser'
+}
+obj["vendor"] = 'Yandex'
+DATASET[obj.label] = obj
+
+local obj = {
   label='Win',
   name='Windows UNKNOWN Ver',
   type='os'
