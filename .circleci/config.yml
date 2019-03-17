@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:18.06.3-ce-git
+
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: |
+         docker build -t lua-resty-woothee:$CIRCLE_BRANCH .
+         docker run lua-resty-woothee:$CIRCLE_BRANCH sh -c 'make all'

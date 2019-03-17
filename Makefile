@@ -2,6 +2,8 @@ LUA_PATH="./lib/?.lua;;"
 
 all: test
 
+local-all: docker-build docker-run-test
+
 testsets:
 	git submodule update --init
 
@@ -15,3 +17,9 @@ lib/resty/woothee/dataset.lua: testfiles
 
 test: lib/resty/woothee/dataset.lua
 	prove -Ilib
+
+docker-build: 
+	docker build -t local/lua-resty-woothee .
+
+docker-run-test: 
+	docker run local/lua-resty-woothee sh -c 'make all'
