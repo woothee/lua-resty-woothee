@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/woothee/lua-resty-woothee.svg?style=svg)](https://circleci.com/gh/woothee/lua-resty-woothee)
+
 # Woothee lua resty
 
 The Lua-Openresty implementation of Project Woothee, which is multi-language user-agent strings parsers.
