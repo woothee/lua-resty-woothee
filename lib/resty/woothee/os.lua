@@ -118,7 +118,7 @@ function _M.challenge_linux(ua, result)
 
   if string.find(ua, 'Android', 1, true) then
     data = dataset.get('Android');
-    match, err = ngx.re.match(ua, [[Android[- ](\d+.\d+(?:.\d+)?)]], "o")
+    match, err = ngx.re.match(ua, [[Android[- ](\d+(.\d+(?:.\d+)?)?)]], "o")
     if match then
       os_version = match[1]
     end
