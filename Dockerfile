@@ -14,5 +14,6 @@ RUN luarocks install etlua
 
 ENV PATH $PATH:/opt/openresty/nginx/sbin
 
-VOLUME /code
+ADD . /code/
+
 WORKDIR /code

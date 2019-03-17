@@ -118,12 +118,9 @@ server {
 ## For Developer (on Docker)
 
 #### docker run & run test
+
 ```
-docker run -v "$(pwd)":/code -i -t toritori0318/lua-resty-woothee /bin/bash
-
-(in container)
-
-make all
+make local-all
 ```
 
 * * * * *
