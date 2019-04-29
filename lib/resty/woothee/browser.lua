@@ -42,7 +42,7 @@ function _M.challenge_safari_chrome(ua, result)
     return false
   end
 
-  local match, err = ngx.re.match(ua, [[Edge\/([.0-9]+)]], "o")
+  local match, err = ngx.re.match(ua, [[(?:Edge|Edg|EdgiOS|EdgA)\/([.0-9]+)]], "o")
   if match then
     version = match[1]
     util.update_map(result, dataset.get('Edge'))
