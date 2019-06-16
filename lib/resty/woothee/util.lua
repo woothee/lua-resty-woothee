@@ -3,7 +3,7 @@ local _M = { }
 local dataset = require('resty.woothee.dataset')
 
 function _M.update_map(target, source)
-  taget = target or {}
+  target = target or {}
   source = source or {}
 
   for key, val in pairs(source) do
