@@ -1,8 +1,8 @@
 package = "lua-resty-woothee"
-version = "1.10.0-1"
+version = "1.10.0-2"
 source = {
     url = "git://github.com/woothee/lua-resty-woothee",
-    tag = "v1.10.0"
+    tag = "v1.10.0-2"
 }
 description = {
     summary = "Woothee(UA Parser) Lua-Openresty implementation",
