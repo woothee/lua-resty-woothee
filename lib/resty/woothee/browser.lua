@@ -42,6 +42,7 @@ function _M.challenge_safari_chrome(ua, result)
     return false
   end
 
+  local version = dataset.VALUE_UNKNOWN;
   local match, err = ngx.re.match(ua, [[(?:Edge|Edg|EdgiOS|EdgA)\/([.0-9]+)]], "o")
   if match then
     version = match[1]
@@ -58,7 +59,6 @@ function _M.challenge_safari_chrome(ua, result)
     return true
   end
 
-  local version = dataset.VALUE_UNKNOWN;
   local match, err = ngx.re.match(ua, [[(?:Chrome|CrMo|CriOS)/([.0-9]+)]], "o")
   if match then
     local match_ob, err = ngx.re.match(ua, [[OPR/([.0-9]+)]], "o")
