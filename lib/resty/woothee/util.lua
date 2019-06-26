@@ -6,7 +6,7 @@ function _M.update_map(target, source)
   target = target or {}
   source = source or {}
 
-  for key, val in pairs(source) do
+  for key, _ in pairs(source) do
     if key == dataset.KEY_LABEL or key == dataset.KEY_TYPE then
       -- pass
     elseif source[key] and string.len(source[key]) > 0 then

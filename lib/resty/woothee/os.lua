@@ -9,11 +9,9 @@ function _M.challenge_windows(ua, result)
   end
 
   if string.find(ua, 'Xbox', 1, true) then
-    local d = nil
+    local d = dataset.get("Xbox360")
     if string.find(ua, 'Xbox; Xbox One)', 1, true) then
       d = dataset.get("XboxOne")
-    else
-      d = dataset.get("Xbox360")
     end
     util.update_map(result, d)
     return true
@@ -114,11 +112,10 @@ function _M.challenge_linux(ua, result)
 
   local data = dataset.get('Linux');
   local os_version = nil
-  local match, err = nil
 
   if string.find(ua, 'Android', 1, true) then
     data = dataset.get('Android');
-    match, err = ngx.re.match(ua, [[Android[- ](\d+(.\d+(?:.\d+)?)?)]], "o")
+    local match, err = ngx.re.match(ua, [[Android[- ](\d+(.\d+(?:.\d+)?)?)]], "o")
     if match then
       os_version = match[1]
     end
@@ -184,30 +181,28 @@ function _M.challenge_smart_phone(ua, result)
 end
 
 function _M.challenge_mobile_phone(ua, result)
-  local data, match, err = nil
-
   if string.find(ua, 'KDDI-', 1, true) then
-    match, err = ngx.re.match(ua, [[KDDI-([^- /;()"']+)]], "o")
+    local match, err = ngx.re.match(ua, [[KDDI-([^- /;()"']+)]], "o")
     if match then
       local term = match[1];
-      data = dataset.get('au');
+      local data = dataset.get('au');
       util.update_category(result, data[dataset.KEY_CATEGORY])
       util.update_os(result, data[dataset.KEY_OS])
       util.update_version(result, term)
       return true
     end
   elseif string.find(ua, 'WILLCOM', 1, true) or string.find(ua, 'DDIPOCKET', 1, true) then
-    match, err = ngx.re.match(ua, [[(?:WILLCOM|DDIPOCKET);[^/]+/([^ /;()]+)]], "o")
+    local match, err = ngx.re.match(ua, [[(?:WILLCOM|DDIPOCKET);[^/]+/([^ /;()]+)]], "o")
     if match then
       local term = match[1];
-      data = dataset.get('willcom');
+      local data = dataset.get('willcom');
       util.update_category(result, data[dataset.KEY_CATEGORY])
       util.update_os(result, data[dataset.KEY_OS])
       util.update_version(result, term)
       return true
     end
   elseif string.find(ua, 'SymbianOS', 1, true) then
-    data = dataset.get('SymbianOS');
+    local data = dataset.get('SymbianOS');
     util.update_category(result, data[dataset.KEY_CATEGORY])
     util.update_os(result, data[dataset.KEY_OS])
     return true
@@ -225,15 +220,13 @@ function _M.challenge_mobile_phone(ua, result)
 end
 
 function _M.challenge_appliance(ua, result)
-  local data = nil
-
   if string.find(ua, 'Nintendo DSi;', 1, true) then
-    data = dataset.get('NintendoDSi');
+    local data = dataset.get('NintendoDSi');
     util.update_category(result, data[dataset.KEY_CATEGORY])
     util.update_os(result, data[dataset.KEY_OS])
     return true
   elseif string.find(ua, 'Nintendo Wii;', 1, true) then
-    data = dataset.get('NintendoWii');
+    local data = dataset.get('NintendoWii');
     util.update_category(result, data[dataset.KEY_CATEGORY])
     util.update_os(result, data[dataset.KEY_OS])
     return true

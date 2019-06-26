@@ -16,6 +16,7 @@ lib/resty/woothee/dataset.lua: testfiles
 	sync; sync; sync;
 
 test: lib/resty/woothee/dataset.lua
+	luacheck --codes lib
 	prove -Ilib
 
 docker-build: 
