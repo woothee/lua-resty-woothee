@@ -24,10 +24,8 @@ end
 
 
 function _M.challenge_smart_phone_patterns(ua, result)
-  local data = nil
-
   if string.find(ua, 'CFNetwork/', 1, true) then
-    data = dataset.get('iOS');
+    local data = dataset.get('iOS');
     util.update_category(result, data[dataset.KEY_CATEGORY])
     util.update_os(result, data[dataset.KEY_NAME])
     return true

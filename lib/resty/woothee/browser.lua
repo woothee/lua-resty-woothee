@@ -9,8 +9,7 @@ function _M.challenge_MSIE(ua, result)
   end
 
   local version = dataset.VALUE_UNKNOWN;
-  local match, err = nil
-  match, err = ngx.re.match(ua, [[MSIE ([.0-9]+);]], "o")
+  local match, err = ngx.re.match(ua, [[MSIE ([.0-9]+);]], "o")
   if match then
     version = match[1]
   else
