@@ -1,4 +1,4 @@
-local _M = { _VERSION = "1.10.0-2" }
+local _M = { _VERSION = "1.10.0-3" }
 
 local dataset = require('resty.woothee.dataset')
 local browser = require('resty.woothee.browser')
