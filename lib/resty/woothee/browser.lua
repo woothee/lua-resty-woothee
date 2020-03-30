@@ -76,6 +76,14 @@ function _M.challenge_safari_chrome(ua, result)
     return true
   end
 
+  local match, err = ngx.re.match(ua, [[GSA\/([.0-9]+)]], "o")
+  if match then
+    version = match[1]
+    util.update_map(result, dataset.get('GSA'))
+    util.update_version(result, version)
+    return true
+  end
+
   local match, err = ngx.re.match(ua, [[Version/([.0-9]+)]], "o")
   if match then
     version = match[1]
