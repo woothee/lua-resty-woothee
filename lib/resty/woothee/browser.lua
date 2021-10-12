@@ -221,4 +221,20 @@ function _M.challenge_vivaldi(ua, result)
   return true
 end
 
+function _M.challenge_samsung(ua, result)
+  if not string.find(ua, 'SamsungBrowser/', 1, true) then
+    return false
+  end
+
+  local version = dataset.VALUE_UNKNOWN
+  local match, err = ngx.re.match(ua, [[SamsungBrowser/([.0-9]+)]], "o")
+  if match then
+    version = match[1]
+  end
+  util.update_map(result, dataset.get('SamsungBrowser'))
+  util.update_version(result, version)
+
+  return true
+end
+
 return _M
