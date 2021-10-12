@@ -18,6 +18,16 @@ function _M.challenge_google(ua, result)
     end
   end
 
+  if string.find(ua, 'compatible; AdsBot-Google-Mobile;', 1, true) then
+    util.update_map(result, dataset.get('AdsBotGoogleMobile'))
+    return true
+  end
+
+  if ngx.re.match(ua, [[^AdsBot-Google]], "o") then
+    util.update_map(result, dataset.get('AdsBotGoogle'))
+    return true
+  end
+
   if string.find(ua, 'Googlebot-Image/', 1, true) then
     util.update_map(result, dataset.get('GoogleBot'))
     return true
