@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     docker:
       - image: docker:18.06.3-ce-git
 
@@ -8,5 +8,10 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: |
-         docker build -t lua-resty-woothee:$CIRCLE_BRANCH .
-         docker run lua-resty-woothee:$CIRCLE_BRANCH sh -c 'make all'
+         docker build -t lua-resty-woothee:$CIRCLE_SHA1 .
+         docker run lua-resty-woothee:$CIRCLE_SHA1 sh -c 'make all'
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
